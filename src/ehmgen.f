@@ -28,7 +28,7 @@ C
       REAL EGTNEW(NFAM), FFBASE(NFAM)
       INTEGER NPFLT(MAXENG)
 C
-      INTEGER I, J, K, N, IENG, IFAM, IOPR, NFLT, NTOT, IDAY
+      INTEGER I, J, K, N, IFAM, IOPR, NFLT, NTOT, IDAY
       INTEGER IREJ, JD, IST, ISTN
       REAL V(NFVAL), RANF, R, DEGR, EM, HPC, DVIB, DOIL, DDEB
       EXTERNAL RANF
@@ -156,7 +156,6 @@ C
             IDAY = -2 * N
             JD = JULADD(JRUNDT, IDAY)
 C
-            IOPR = 1 + MOD(I, NOPR)
             WRITE (CFLT,9110) COPR(I), 100 + MOD(I * 7 + K, 8900)
             ISTN = 1 + MOD(I + K, NSTN)
             CORG = CSTAB(ISTN)

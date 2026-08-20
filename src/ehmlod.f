@@ -24,7 +24,8 @@ C=====================================================================
 C
       INTEGER NCOV(MAXENG)
       INTEGER I, J, IRC, JD, JLOW, NIN, NOUT, NBAD
-      INTEGER NRJSER, NRJDAT, NRJRNG, NZERO, NTHIN, IPAGE, NLINE
+      INTEGER NRJSER, NRJDAT, NRJRNG, NZERO, NTHIN, NEXP, IPAGE
+      INTEGER NLINE
       INTEGER ENGFND, JULADD
       REAL V(NFVAL), COVPCT
       CHARACTER*8 CE
@@ -117,13 +118,19 @@ C     STEP 3.  TELEMETRY COVERAGE REPORT
 C     ================================================================
       NZERO = 0
       NTHIN = 0
+      NEXP = 0
       CALL PAGHDR (LUPRT, 'TELEMETRY COVERAGE - STEP 020', IPAGE,
      +             NLINE)
       WRITE (LUPRT,9000)
 C
       DO 500 I = 1, NENG
+C        AN ENGINE STRIPPED IN THE SHOP IS NOT EXPECTED TO REPORT AND
+C        IS KEPT OUT OF THE COVERAGE PERCENTAGE.
+         IF (ISTG(I) .EQ. 4) GO TO 440
+         NEXP = NEXP + 1
          IF (NCOV(I) .EQ. 0) NZERO = NZERO + 1
          IF (NCOV(I) .GT. 0 .AND. NCOV(I) .LT. 20) NTHIN = NTHIN + 1
+  440    CONTINUE
          IF (NCOV(I) .GE. 20) GO TO 500
          IF (NLINE .LT. MAXLIN) GO TO 450
          CALL PAGHDR (LUPRT, 'TELEMETRY COVERAGE - STEP 020', IPAGE,
@@ -136,10 +143,10 @@ C
   500 CONTINUE
 C
       COVPCT = 0.0
-      IF (NENG .GT. 0) COVPCT = 100.0 * FLOAT(NENG - NZERO)
-     +                          / FLOAT(NENG)
+      IF (NEXP .GT. 0) COVPCT = 100.0 * FLOAT(NEXP - NZERO)
+     +                          / FLOAT(NEXP)
       WRITE (LUPRT,9020) NIN, NOUT, NRJSER, NRJDAT, NRJRNG, NBAD,
-     +                   NENG, NZERO, NTHIN, COVPCT
+     +                   NENG, NEXP, NZERO, NTHIN, COVPCT
 C
       IF (COVPCT .LT. 90.0) CALL ERRMSG (2011,
      +   'FLEET COVERAGE BELOW NINETY PER CENT - REVIEW GATEWAY')
@@ -159,6 +166,7 @@ C
      +        ' REJECT - READING NOT CREDIBLE  ', I8 /
      +        ' REJECT - RECORD UNREADABLE     ', I8 /
      +        ' ENGINES ON MASTER              ', I8 /
+     +        ' ENGINES EXPECTED TO REPORT     ', I8 /
      +        ' ENGINES WITH NO DOWNLINK       ', I8 /
      +        ' ENGINES WITH THIN COVERAGE     ', I8 /
      +        ' FLEET COVERAGE PER CENT        ', F8.1 /
