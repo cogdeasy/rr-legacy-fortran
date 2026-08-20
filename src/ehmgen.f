@@ -235,10 +235,10 @@ C
  9000 FORMAT ('1EHMGEN  RUN ', A8, '  JULIAN ', I5,
      +        '  SEED ', I10 /
      +        ' ', 60('-'))
- 9010 FORMAT (' 0ENGINE MASTER RECORDS WRITTEN  ', I8 /
+ 9010 FORMAT ('0ENGINE MASTER RECORDS WRITTEN  ', I8 /
      +        ' DOWNLINK RECORDS WRITTEN       ', I8 /
      +        ' RECORDS REJECTED               ', I8 /
-     +        ' 0EHM2000I STEP 010 COMPLETE')
+     +        '0EHM2000I STEP 010 COMPLETE')
  9100 FORMAT ('ESN-', I4.4)
  9110 FORMAT (A2, I4.4)
  9120 FORMAT ('B', I2.2, '.', I2.2)

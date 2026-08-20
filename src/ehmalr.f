@@ -171,17 +171,17 @@ C
       CLOSE (LUERR)
       STOP
 C
- 9000 FORMAT (' 0SERIAL   TAIL   STN  SEVERITY SOURCE   PARM',
+ 9000 FORMAT ('0SERIAL   TAIL   STN  SEVERITY SOURCE   PARM',
      +        '   OBSERVED     LIMIT   DATE  NARRATIVE' /
      +        ' ', 124('-'))
  9010 FORMAT (' ', A8, 1X, A6, 1X, A4, 1X, A8, 1X, A8, 1X, A4, 1X,
      +        F10.3, 1X, F9.3, 1X, I5, 2X, A44)
- 9020 FORMAT (' 0', 124('-') /
+ 9020 FORMAT ('0', 124('-') /
      +        ' ALERTS RAISED                  ', I8 /
      +        ' SEVERITY CRITICAL              ', I8 /
      +        ' SEVERITY HIGH                  ', I8 /
      +        ' SEVERITY MEDIUM                ', I8 /
-     +        ' 0EHM2040I STEP 040 COMPLETE')
+     +        '0EHM2040I STEP 040 COMPLETE')
       END
 C
       SUBROUTINE ALRTST (I, CKEY, VALUE, JDATE, ISRC, TEXT)

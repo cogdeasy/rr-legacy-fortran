@@ -146,12 +146,12 @@ C
       CLOSE (LUERR)
       STOP
 C
- 9000 FORMAT (' 0ENGINES WITH THIN OR ABSENT COVERAGE' /
-     +        ' 0SERIAL   FAM  OPR TAIL   STN  STAGE  SECTORS' /
+ 9000 FORMAT ('0ENGINES WITH THIN OR ABSENT COVERAGE' /
+     +        '0SERIAL   FAM  OPR TAIL   STN  STAGE  SECTORS' /
      +        ' ', 50('-'))
  9010 FORMAT (' ', A8, 1X, A4, 1X, A2, 2X, A6, 1X, A4, 3X, I1,
      +        5X, I5)
- 9020 FORMAT (' 0', 50('-') /
+ 9020 FORMAT ('0', 50('-') /
      +        ' RECORDS READ                   ', I8 /
      +        ' RECORDS ACCEPTED               ', I8 /
      +        ' REJECT - UNKNOWN SERIAL        ', I8 /
@@ -162,6 +162,6 @@ C
      +        ' ENGINES WITH NO DOWNLINK       ', I8 /
      +        ' ENGINES WITH THIN COVERAGE     ', I8 /
      +        ' FLEET COVERAGE PER CENT        ', F8.1 /
-     +        ' 0EHM2020I STEP 020 COMPLETE')
+     +        '0EHM2020I STEP 020 COMPLETE')
  9500 FORMAT (' EHM2012E ', A8, 1X, I5, 1X, A)
       END

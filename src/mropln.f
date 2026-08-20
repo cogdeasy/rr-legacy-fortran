@@ -171,21 +171,21 @@ C
       CLOSE (LUERR)
       STOP
 C
- 9000 FORMAT (' 0SERIAL   FAM  OPR STATUS    RUL  LIMITING MOD  ',
+ 9000 FORMAT ('0SERIAL   FAM  OPR STATUS    RUL  LIMITING MOD  ',
      +        'SCOPE PRI  SLOT SHOP  REQ WEEK  ALLOC WEEK' /
      +        ' ', 110('-'))
  9010 FORMAT (' ', A8, 1X, A4, 1X, A2, 2X, A5, 1X, I6, 2X, A9,
      +        2X, A4, 3X, I1, 3X, A4, 1X, A4, 6X, I4, 8X, I4)
- 9020 FORMAT (' 0SLOT SHOP  WEEK CAPABILITY  BAYS  TAKEN  FREE' /
+ 9020 FORMAT ('0SLOT SHOP  WEEK CAPABILITY  BAYS  TAKEN  FREE' /
      +        ' ', 48('-'))
  9030 FORMAT (' ', A4, 1X, A4, 1X, I4, 1X, A4, 8X, I4, 3X, I4,
      +        2X, I4)
- 9040 FORMAT (' 0', 48('-') /
+ 9040 FORMAT ('0', 48('-') /
      +        ' SLOTS ON FILE                  ', I8 /
      +        ' ENGINES ALLOCATED              ', I8 /
      +        ' ENGINES NOT ALLOCATED          ', I8 /
      +        ' OF WHICH RED PRIORITY          ', I8 /
-     +        ' 0EHM2060I STEP 060 COMPLETE')
+     +        '0EHM2060I STEP 060 COMPLETE')
       END
 C
       INTEGER FUNCTION IWKADD (IYW, N)

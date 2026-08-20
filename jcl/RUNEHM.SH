@@ -21,37 +21,42 @@
 # REMAINING STEPS, AS IT DOES ON THE MAINFRAME.
 #=====================================================================
 
-set -e
-
 BASE=`cd \`dirname $0\`/.. && pwd`
 BIN=$BASE/bin
 DAT=$BASE/dat
 WRK=$BASE/work
 
-mkdir -p $WRK
-cd $WRK
+mkdir -p $WRK || exit 12
+cd $WRK || exit 12
 
 # ---- ALLOCATE THE CONTROL FILES INTO THE WORK LIBRARY ---------------
-cp $DAT/PARLIM.DAT .
-cp $DAT/SHPSLT.DAT .
-cp $DAT/EHMCTL.DAT .
+cp $DAT/PARLIM.DAT . || exit 12
+cp $DAT/SHPSLT.DAT . || exit 12
+cp $DAT/EHMCTL.DAT . || exit 12
 
 : > SYSPRINT.TXT
+: > SYSERR.LOG
 
+# ---- EXECUTE ONE STEP.  A NON ZERO CONDITION CODE FLUSHES THE ------
+# ---- REMAINING STEPS, AS IT DOES ON THE MAINFRAME. -----------------
 runstep()
 {
     STEP=$1
     PGM=$2
     echo "EHM0001I STEP $STEP PGM=$PGM STARTED"
+    rm -f SYSERR.DAT
     $BIN/$PGM < EHMCTL.DAT >> SYSPRINT.TXT
     RC=$?
     if [ -s SYSERR.DAT ] ; then
         cat SYSERR.DAT >> SYSERR.LOG
     fi
     echo "EHM0002I STEP $STEP PGM=$PGM ENDED    COND CODE $RC"
+    if [ $RC -ne 0 ] ; then
+        echo "EHM0004E STEP $STEP ABENDED - REMAINING STEPS FLUSHED"
+        echo "EHM0003I JOB ENDED - PRINT FILE IS $WRK/SYSPRINT.TXT"
+        exit $RC
+    fi
 }
-
-: > SYSERR.LOG
 
 runstep 010 EHMGEN
 runstep 020 EHMLOD

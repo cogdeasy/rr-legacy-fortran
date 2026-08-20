@@ -218,7 +218,7 @@ C     ================================================================
       CLOSE (LUERR)
       STOP
 C
- 9000 FORMAT (' 0OPR  ENGINES    RED  AMBER  GREEN  NODATA  ',
+ 9000 FORMAT ('0OPR  ENGINES    RED  AMBER  GREEN  NODATA  ',
      +        'MEAN SCORE' /
      +        ' ', 52('-'))
  9010 FORMAT (' ', A2, 3X, I5, 3X, I5, 2X, I5, 2X, I5, 3X, I5,
@@ -226,32 +226,32 @@ C
  9020 FORMAT (' ', 52('-') /
      +        ' ALL', 2X, I5, 3X, I5, 2X, I5, 2X, I5, 3X, I5,
      +        4X, F8.1)
- 9100 FORMAT (' 0SERIAL   FAM  OPR TAIL   STN  ENV    EGTM',
+ 9100 FORMAT ('0SERIAL   FAM  OPR TAIL   STN  ENV    EGTM',
      +        '   SLOPE/CYC  VIBMAX  OILC/H  DEBRIS     RUL',
      +        '  LIMITING MOD  SCORE  STATUS' /
      +        ' ', 128('-'))
  9110 FORMAT (' ', A8, 1X, A4, 1X, A2, 2X, A6, 1X, A4, 3X, I1,
      +        1X, F7.1, 2X, F9.5, 2X, F6.2, 2X, F6.3, 2X, F6.1,
      +        1X, I7, 2X, A9, 2X, F5.1, 2X, A5)
- 9200 FORMAT (' 0SEVERITY   COUNT    SOURCE     COUNT' /
+ 9200 FORMAT ('0SEVERITY   COUNT    SOURCE     COUNT' /
      +        ' ', 40('-'))
  9210 FORMAT (' ', A8, 1X, I7, 4X, A8, 2X, I7)
  9220 FORMAT (' ', 40('-') /
      +        ' TOTAL ALERTS RAISED ', I7)
- 9230 FORMAT (' 0CRITICAL AND HIGH SEVERITY ALERTS' /
-     +        ' 0SERIAL   TAIL   STN  SEVERITY SOURCE   PARM',
+ 9230 FORMAT ('0CRITICAL AND HIGH SEVERITY ALERTS' /
+     +        '0SERIAL   TAIL   STN  SEVERITY SOURCE   PARM',
      +        '   OBSERVED     LIMIT  NARRATIVE' /
      +        ' ', 118('-'))
  9240 FORMAT (' ', A8, 1X, A6, 1X, A4, 1X, A8, 1X, A8, 1X, A4, 1X,
      +        F10.3, 1X, F9.3, 2X, A44)
- 9300 FORMAT (' 0SERIAL   FAM  OPR TAIL   PRI     RUL  SCOPE  SLOT',
+ 9300 FORMAT ('0SERIAL   FAM  OPR TAIL   PRI     RUL  SCOPE  SLOT',
      +        ' SHOP  WEEK  STATUS' /
      +        ' ', 74('-'))
  9310 FORMAT (' ', A8, 1X, A4, 1X, A2, 2X, A6, 2X, I1, 1X, I7,
      +        2X, A4, 3X, A4, 1X, A4, 1X, I5, 2X, A5)
  9320 FORMAT (' ', 74('-') /
      +        ' ENGINES ON THE PLAN ', I7)
- 9400 FORMAT (' 0RUN IDENTIFIER                 ', 5X, A8 /
+ 9400 FORMAT ('0RUN IDENTIFIER                 ', 5X, A8 /
      +        ' RUN DATE, JULIAN               ', I13 /
      +        ' TREND WINDOW, CYCLES           ', I13 /
      +        ' ENGINES ON MASTER              ', I13 /
@@ -262,5 +262,5 @@ C
      +        '                GREEN           ', I13 /
      +        '                NO DATA         ', I13 /
      +        ' MEAN FLEET HEALTH SCORE        ', F13.1 /
-     +        ' 0EHM2070I STEP 070 COMPLETE - END OF REPORT')
+     +        '0EHM2070I STEP 070 COMPLETE - END OF REPORT')
       END
