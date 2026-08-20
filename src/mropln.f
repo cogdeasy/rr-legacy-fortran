@@ -63,7 +63,11 @@ C
 C     ---- CURRENT WEEK, FORM YYWW, FROM THE RUN DATE -----------------
       IYR = JRUNDT / 1000
       IDAY = JRUNDT - IYR * 1000
-      IWKNOW = IYR * 100 + (IDAY - 1) / 7 + 1
+      NWKS = (IDAY - 1) / 7 + 1
+C     THE PLANNING CALENDAR CARRIES FIFTY TWO WEEKS, SO THE RESIDUAL
+C     DAYS AT THE YEAR END ARE WORKED IN WEEK FIFTY TWO.
+      IF (NWKS .GT. 52) NWKS = 52
+      IWKNOW = IYR * 100 + NWKS
 C
 C     ================================================================
 C     STEP 2.  WORK THE FLEET IN URGENCY ORDER
