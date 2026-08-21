@@ -44,8 +44,9 @@ temporary output area and compares each one with `test/golden/`. It prints one
 `SAME`/`DIFFERENT` line per file and exits
 
 * `0` — zero differences, behaviour preserved;
-* `8` — at least one file differs (or is missing/no longer produced), each named on the report;
-* `12` — no baseline present, or the run did not produce an expected file.
+* `8` — the comparison ran and at least one file differs, each named on the report;
+* `12` — the comparison could not be made: no baseline present, a step abended and
+  flushed the job stream, or a baselined artefact was not produced.
 
 `work/` still holds the run that was just compared, so a reported difference can be
 inspected directly:
