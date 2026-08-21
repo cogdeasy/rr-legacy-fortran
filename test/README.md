@@ -45,8 +45,8 @@ temporary output area and compares each one with `test/golden/`. It prints one
 
 * `0` — zero differences, behaviour preserved;
 * `8` — the comparison ran and at least one file differs, each named on the report;
-* `12` — the comparison could not be made: no baseline present, a step abended and
-  flushed the job stream, or a baselined artefact was not produced.
+* `12` — the comparison could not be made: no baseline present, the build failed, a step
+  abended and flushed the job stream, or a baselined artefact was not produced.
 
 `work/` still holds the run that was just compared, so a reported difference can be
 inspected directly:

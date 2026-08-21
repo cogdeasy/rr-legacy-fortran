@@ -31,13 +31,12 @@ cd $BASE
 
 echo "VERIFY: CLEAN BUILD AND RUN"
 rm -rf work
-make clean
-make
 
-# ---- A STEP THAT ABENDS FLUSHES THE REST OF THE JOB STREAM, SO THERE -
-# ---- IS NOTHING TO COMPARE.  SAY SO INSTEAD OF DYING UNDER SET -E. ---
+# ---- A BAD BUILD, OR A STEP THAT ABENDS AND FLUSHES THE REST OF THE --
+# ---- JOB STREAM, LEAVES NOTHING TO COMPARE.  SAY SO AND REPORT THE ---
+# ---- DOCUMENTED CONDITION CODE INSTEAD OF DYING UNDER SET -E. -------
 set +e
-make run
+make clean && make && make run
 RC=$?
 set -e
 if [ $RC -ne 0 ] ; then
