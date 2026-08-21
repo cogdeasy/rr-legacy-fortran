@@ -89,7 +89,7 @@ C
 C
       SUBROUTINE ENGWR (LU, I)
 C     ----------------------------------------------------------------
-C     WRITE ENGINE MASTER ENTRY I.  RECORD LENGTH 78 CHARACTERS.
+C     WRITE ENGINE MASTER ENTRY I.  RECORD LENGTH 85 CHARACTERS.
 C     ----------------------------------------------------------------
       INCLUDE 'EHMPRM.INC'
       INCLUDE 'EHMCOM.INC'
