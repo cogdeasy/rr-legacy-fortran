@@ -1,0 +1,45 @@
+#!/bin/sh
+#=====================================================================
+# BASELINE  CAPTURE THE GOLDEN BASELINE OF THE NIGHTLY JOB STREAM
+#           ROLLS-ROYCE PLC - CIVIL AERO SUPPORT - DERBY
+#
+# RUNS THE SUITE FROM A COMPLETELY CLEAN STATE AND COPIES THE PRINT
+# FILE, THE DIAGNOSTIC FILE AND EVERY GENERATED MASTER FILE INTO
+# TEST/GOLDEN, WHICH IS COMMITTED TO THE REPOSITORY.
+#
+# THE SUITE IS DETERMINISTIC - EHMCTL.DAT SUPPLIES THE RUN DATE AND
+# THE GENERATOR SEED - SO A RERUN WITH UNCHANGED INPUTS AND UNCHANGED
+# BEHAVIOUR MUST REPRODUCE THESE FILES BYTE FOR BYTE.
+#
+# ONLY RUN THIS WHEN AN INTENTIONAL CHANGE OF BEHAVIOUR HAS BEEN MADE
+# AND REVIEWED.  SEE TEST/README.MD.
+#=====================================================================
+set -e
+
+BASE=`cd \`dirname $0\`/.. && pwd`
+GOLDEN=$BASE/test/golden
+
+. $BASE/tools/ehmfiles.sh
+
+cd $BASE
+
+echo "BASELINE: CLEAN BUILD AND RUN"
+rm -rf work
+make clean
+make
+make run
+
+echo "BASELINE: COPYING ARTEFACTS INTO $GOLDEN"
+rm -rf $GOLDEN
+mkdir -p $GOLDEN
+for F in $EHM_FILES ; do
+    if [ ! -f work/$F ] ; then
+        echo "BASELINE: EXPECTED FILE work/$F WAS NOT PRODUCED" >&2
+        exit 12
+    fi
+    cp work/$F $GOLDEN/$F
+done
+
+echo "BASELINE: GOLDEN BASELINE CAPTURED"
+ls -l $GOLDEN
+echo "BASELINE: COMMIT test/golden AND RERUN tools/verify.sh TO CONFIRM"
