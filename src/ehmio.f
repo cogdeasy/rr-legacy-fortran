@@ -114,13 +114,14 @@ C     ----------------------------------------------------------------
       INCLUDE 'EHMCOM.INC'
       INTEGER I
       CHARACTER*8 CLAST
+      CHARACTER*160 CBUF
 C
       NENG = 0
       CLAST = '        '
       CALL OPNSEQ (LUENG, 'ENGMAS.DAT', 'OLD')
   100 CONTINUE
       I = NENG + 1
-      IF (I .GT. MAXENG) GO TO 800
+      IF (I .GT. MAXENG) GO TO 750
       READ (LUENG,9000,END=700,ERR=810)
      +      CESN(I), CFAM(I), COPR(I), CTAIL(I), IPOSN(I),
      +      CBLD(I), ISTG(I), TFH(I), ITFC(I), HSO(I),
@@ -135,6 +136,13 @@ C
       NENG = I
       GO TO 100
 C
+C     ---- THE TABLE IS FULL.  A FILE HOLDING EXACTLY MAXENG RECORDS
+C     ---- IS NOT AN OVERFLOW, SO THE NEXT RECORD IS READ INTO A WORK
+C     ---- AREA AND ONLY A GENUINE SURPLUS IS DIAGNOSED.
+  750 CONTINUE
+      READ (LUENG,9010,END=700,ERR=800) CBUF
+      GO TO 800
+C
   700 CONTINUE
       CLOSE (LUENG)
       RETURN
@@ -148,6 +156,7 @@ C
  9000 FORMAT (A8, 1X, A4, 1X, A2, 1X, A6, 1X, I1, 1X, A6, 1X, I1,
      +        1X, F8.1, 1X, I6, 1X, F8.1, 1X, I6, 1X, F6.1, 1X, I1,
      +        1X, A4, 1X, A4)
+ 9010 FORMAT (A)
       END
 C
       SUBROUTINE FLTWR (LU, CE, JDATE, CFLT, CORG, CDST, V)
@@ -343,13 +352,14 @@ C     ----------------------------------------------------------------
       INCLUDE 'EHMCOM.INC'
       INTEGER K, J, ENGFND
       CHARACTER*8 CE
+      CHARACTER*160 CBUF
       EXTERNAL ENGFND
 C
       NALR = 0
       CALL OPNSEQ (LUALR, 'ALRTMS.DAT', 'OLD')
   100 CONTINUE
       K = NALR + 1
-      IF (K .GT. MAXALR) GO TO 800
+      IF (K .GT. MAXALR) GO TO 750
       READ (LUALR,9000,END=700,ERR=810) CE, IADAT(K), IASEV(K),
      +      IASRC(K), CAPRM(K), AVAL(K), ALIM(K), CATXT(K)
       J = ENGFND(CE)
@@ -357,6 +367,12 @@ C
       IAENG(K) = J
       NALR = K
       GO TO 100
+C
+C     ---- AS IN ENGLOD, A FILE HOLDING EXACTLY MAXALR RECORDS IS NOT
+C     ---- AN OVERFLOW.
+  750 CONTINUE
+      READ (LUALR,9010,END=700,ERR=800) CBUF
+      GO TO 800
 C
   700 CONTINUE
       CLOSE (LUALR)
@@ -373,6 +389,7 @@ C
       GO TO 100
  9000 FORMAT (A8, 1X, I5, 1X, I1, 1X, I1, 1X, A4, 1X, F9.3, 1X,
      +        F9.3, 1X, A44)
+ 9010 FORMAT (A)
       END
 C
       SUBROUTINE RULWR (LU, I, IMOD, NCYC, RISK)
