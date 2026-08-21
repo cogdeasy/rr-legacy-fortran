@@ -28,6 +28,11 @@ reallocated by every step, so only its accumulation in `SYSERR.LOG` is kept.
 
 The file list lives in one place, `tools/ehmfiles.sh`, sourced by both scripts.
 
+Determinism is a property of the inputs, not of the machine: report values are floating
+point computed at `-O1`, so the baseline is only reproducible on the same compiler and
+platform. Re-baseline after a toolchain change, and treat such a diff as toolchain noise
+rather than evidence about the source change.
+
 ## Verify after each refactor
 
 ```sh
